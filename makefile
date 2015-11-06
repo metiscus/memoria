@@ -28,7 +28,7 @@ MEMORIA_C = $(filter %.c, $(MEMORIA_SRC))
 MEMORIA_OBJ := $(MEMORIA_C:.c=.o)
 
 memoria: libmtwist.a libchibi-scheme.a libmemoria_script.so $(MEMORIA_SRC) $(MEMORIA_OBJ)
-	$(CC) $(CFLAGS) -o memoria memoria.c $(MEMORIA_OBJ) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o memoria memoria.c $(LDFLAGS)
 
 .PHONY: scripts
 scripts:
