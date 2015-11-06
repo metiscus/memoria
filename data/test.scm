@@ -12,9 +12,11 @@
 
 (define (derp)
     (display "Running: test.scm\n")
-    (sleep 15000)
     (random_init 1000)
+    (display-all "here is a random number it should be 3: " (random_uint 5) "\n")
+    (sleep 100000)
     (random_reseed_time)
+    (display-all "here is a random number: " (random_uint 5) "\n")
     (display (time-desc hour))
     (display "\n")
     (define player (player_new))
