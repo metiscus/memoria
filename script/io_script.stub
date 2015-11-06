@@ -1,0 +1,2 @@
+(c-include "io.h")
+(define-c void (sleep io_sleep) (unsigned-int))
