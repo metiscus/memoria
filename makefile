@@ -1,5 +1,5 @@
 CC= gcc
-CFLAGS= -g -Wall -I. -Ilibmtwist -Ichibi-scheme
+CFLAGS= -g -Wall -I. -Ilibmtwist -Ichibi-scheme -fPIC
 LDFLAGS= -L. -lmtwist -lchibi-scheme -lm -ldl
 
 default: all
@@ -16,24 +16,23 @@ libmtwist.a:
 	rm -f mt.o seed.o
 
 MEMORIA_SRC=\
-	memoria.c\
 	random.h random.c\
 	object.h object.c\
 	player.h player.c\
 	io.h io.c\
 
-libmemoria_script.so: scripts script/io_script.c io.c
-	$(CC) $(CFLAGS) -fPIC -shared -o libmemoria_script.so script/io_script.c io.c $(LDFLAGS)
+libmemoria_script.so: scripts script.stub script.c
+	$(CC) $(CFLAGS) -shared -o libmemoria_script.so script.c $(MEMORIA_SRC) $(LDFLAGS)
 
 MEMORIA_C = $(filter %.c, $(MEMORIA_SRC))
 MEMORIA_OBJ := $(MEMORIA_C:.c=.o)
 
 memoria: libmtwist.a libchibi-scheme.a libmemoria_script.so $(MEMORIA_SRC) $(MEMORIA_OBJ)
-	$(CC) $(CFLAGS) -o memoria $(MEMORIA_OBJ) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o memoria memoria.c $(MEMORIA_OBJ) $(LDFLAGS)
 
 .PHONY: scripts
 scripts:
-	cd script && chibi-ffi *.stub
+	chibi-ffi script.stub
 
 clean:
 	-rm -f memoria libmtwist.a libchibi-scheme.a $(MEMORIA_OBJ)

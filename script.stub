@@ -1,0 +1,30 @@
+(c-include "io.h")
+(c-include "player.h")
+(c-include "object.h")
+(c-include "random.h")
+
+
+(define-c void (sleep io_sleep) (unsigned-int))
+
+(define-c-struct player
+    predicate: player?
+    (string name player-name)
+    (unsigned-int gender player-gender)
+    (unsigned-int race player-race)
+    (unsigned-int level player-level)
+    (unsigned-int exp player-exp)
+    (unsigned-int hp player-hp)
+    (unsigned-int hp_max player-hp-max)
+    (unsigned-int x player-x)
+    (unsigned-int y player-y)
+)
+
+(define-c (pointer player) player_new ())
+(define-c void player_delete ((pointer player)))
+(define-c void player_move ((pointer player) unsigned-int unsigned-int))
+
+(define-c void random_init(unsigned-int))
+(define-c void random_reseed(unsigned-int))
+(define-c void random_reseed_time())
+(define-c unsigned-int random_uint(unsigned-int))
+(define-c unsigned-int random_uint_range(unsigned-int unsigned-int))
