@@ -22,7 +22,7 @@ extern void      player_delete(player_t* ptr);
 extern void      player_save(player_t* ptr, char* filename);
 extern void      player_load(char* filename, player_t* ptr);
 extern void      player_inv_add(player_t* ptr, uint32_t id);
-extern void      player_inv_remove(player_t* ptr, uint32_t id);
+extern void      player_inv_remove(player_t* ptr, uint32_t id, uint32_t qty);
 extern uint32_t  player_inv_count(player_t* ptr, uint32_t id);
 extern void      player_move(player_t* ptr, uint32_t x, uint32_t y);
 

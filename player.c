@@ -59,9 +59,19 @@ void player_inv_add(player_t* ptr, uint32_t id)
     }
 }
 
-void player_inv_remove(player_t* ptr, uint32_t id)
+void player_inv_remove(player_t* ptr, uint32_t id, uint32_t qty)
 {
-    assert(false);
+    if(ptr && ptr->inventory)
+    {
+        uint32_t i;
+        for(i=0; i<ptr->inventory_count; ++i)
+        {
+            if(ptr->inventory[i].id == id)
+            {
+                --ptr->inventory[i].qty;
+            }
+        }
+    }
 }
 
 uint32_t player_inv_count(player_t* ptr, uint32_t id)
